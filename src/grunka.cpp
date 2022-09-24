@@ -68,9 +68,6 @@ void on_input(engine::Engine &engine, void *grunka_object, engine::InputCommand 
 void render(engine::Engine &engine, void *grunka_object) {
 }
 
-void render_imgui(engine::Engine &engine, void *grunka_object) {
-}
-
 void on_shutdown(engine::Engine &engine, void *grunka_object) {
     engine::terminate(engine);
 }
