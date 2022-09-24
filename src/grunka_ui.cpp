@@ -1,4 +1,3 @@
-#include "grunka_ui.h"
 #include "grunka.h"
 
 #pragma warning(push, 0)

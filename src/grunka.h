@@ -50,6 +50,14 @@ void on_input(engine::Engine &engine, void *grunka_object, engine::InputCommand 
 void render(engine::Engine &engine, void *grunka_object);
 
 /**
+ * @brief Renders the imgui
+ *
+ * @param engine The engine which calls this function
+ * @param grunka_object The Grunka to render
+ */
+void render_imgui(engine::Engine &engine, void *grunka_object);
+
+/**
  * @brief Asks the Grunka to cleanup.
  *
  * @param engine The engine which calls this function
