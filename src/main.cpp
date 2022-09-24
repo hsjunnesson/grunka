@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
 
         engine::Engine engine(allocator, config_path);
         grunka::Grunka grunka(allocator, config_path);
-        
+
         engine::EngineCallbacks engine_callbacks;
         engine_callbacks.on_input = grunka::on_input;
         engine_callbacks.update = grunka::engine_update;

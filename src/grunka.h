@@ -1,8 +1,8 @@
 #pragma once
 
 #pragma warning(push, 0)
-#include <memory_types.h>
 #include <collection_types.h>
+#include <memory_types.h>
 #include <stdint.h>
 #pragma warning(pop)
 
@@ -11,7 +11,6 @@ struct Engine;
 struct InputCommand;
 struct ActionBinds;
 } // namespace engine
-
 
 namespace grunka {
 
