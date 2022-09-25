@@ -32,18 +32,19 @@ include (FindPackageHandleStandardArgs)
 
 if (NOT EXISTS ${WWISE_SDK})
   message (FATAL_ERROR "'${WWISE_SDK}' does not exist")
-endif ()
+endif()
 
-find_path ( Wwise_INCLUDE_DIR
+find_path(Wwise_INCLUDE_DIR
   NAMES "AK/AkWwiseSDKVersion.h"
   PATHS "${WWISE_SDK}/include"
-  NO_CMAKE_FIND_ROOT_PATH )
+  NO_CMAKE_FIND_ROOT_PATH
+)
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
   set(SDK_BUILD_CONFIG Release)
-else ()
+else()
   set(SDK_BUILD_CONFIG Debug)
-endif ()
+endif()
 
 set (ABI_DIR x64_vc170)
 
@@ -53,7 +54,12 @@ set (libNames
   AkParametricEQFX AkPeakLimiterFX AkPitchShifterFX AkRecorderFX AkRoomVerbFX AkSilenceSource
   AkSineSource AkSoundEngine AkStereoDelayFX
   AkStreamMgr AkSynthOneSource AkTimeStretchFX AkToneSource AkTremoloFX AkVorbisDecoder
+  CommunicationCentral
 )
+
+if (CMAKE_BUILD_TYPE MATCHES Release)
+  list(FILTER libNames EXCLUDE REGEX "CommunicationCentral")
+endif()
 
 set(SDK_LIB_DIR ${WWISE_SDK}/${ABI_DIR}/${SDK_BUILD_CONFIG}/lib)
 
@@ -65,6 +71,7 @@ endforeach()
 set(Wwise_LIBRARIES
   # Base libs, contain circular dependencies, order is important!
   AkMemoryMgr
+  CommunicationCentral
   AkStreamMgr # <- dependency on AkMemoryMgr
   AkSoundEngine # <- dependency on AkStreamMgr
   AkMusicEngine # <- dependency on AkSoundEngine
@@ -76,7 +83,6 @@ set(Wwise_LIBRARIES
   AkParametricEQFX AkPeakLimiterFX AkPitchShifterFX AkRecorderFX AkRoomVerbFX
   AkStereoDelayFX AkTimeStretchFX AkTremoloFX 
 
-
   # Sources
   AkAudioInputSource AkSilenceSource AkSineSource
   AkSynthOneSource AkToneSource
@@ -84,6 +90,10 @@ set(Wwise_LIBRARIES
   # Misc
   AkVorbisDecoder
 )
+
+if (CMAKE_BUILD_TYPE MATCHES Release)
+  list(FILTER Wwise_LIBRARIES EXCLUDE REGEX "CommunicationCentral")
+endif()
 
 # Handle QUIETLY and REQUIRED args and set Wwise_FOUND to true if all libs found
 find_package_handle_standard_args(Wwise
@@ -101,5 +111,5 @@ mark_as_advanced(SDK_LIB_DIR SDK_BUILD_CONFIG WWISE_SDK
   AkToneSource AkExpanderFX AkGuitarDistortionFX AkSoundSeedWoosh AkTremoloFX
   AkMatrixReverbFX AkStreamMgr AkDelayFX AkAudioInputSource AkSoundSeedWind AkGainFX
   AuroHeadphoneFX AuroPannerMixer CrankcaseAudioREVModelPlayerFX AkSoundEngine
-  CommunicationCentral zip
+  CommunicationCentral
 )

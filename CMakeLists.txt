@@ -95,14 +95,15 @@ foreach(lib ${Wwise_LIBRARIES})
     target_link_libraries(${PROJECT_NAME} PRIVATE ${lib})
 endforeach()
 
+target_link_libraries(${PROJECT_NAME} PRIVATE debug ws2_32)
+
+
 
 # Compiler warnings & definitions
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE _USE_MATH_DEFINES)
 
-if (CMAKE_BUILD_TYPE MATCHES Release)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE AK_OPTIMIZED)
-endif()
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DAK_OPTIMIZED")
 
 if (CMAKE_COMPILER_IS_GNUCXX)
     target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic -Wno-unknown-pragmas -Wno-gnu-zero-variadic-macro-arguments)

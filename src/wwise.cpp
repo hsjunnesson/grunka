@@ -6,7 +6,12 @@
 #include <AK/SoundEngine/Common/AkSoundEngine.h>
 #include <AK/SoundEngine/Common/AkStreamMgrModule.h>
 #include <AK/SoundEngine/Common/IAkStreamMgr.h>
+
 #include <AK/Tools/Common/AkPlatformFuncs.h>
+
+#if !defined AK_OPTIMIZED
+#include <AK/Comm/AkCommunication.h>
+#endif
 
 #include <memory.h>
 #include <new>
@@ -64,10 +69,26 @@ Wwise::Wwise(foundation::Allocator &allocator)
         }
     }
 
+#if !defined AK_OPTIMIZED
+    // Communication
+    {
+        AkCommSettings comm_settings;
+        AK::Comm::GetDefaultInitSettings(comm_settings);
+        AKRESULT result = AK::Comm::Init(comm_settings);
+        if (result != AK_Success) {
+            log_fatal("Could not initialize AK::Comm: %d", result);
+        }
+    }
+#endif
+
     log_info("Wwise initialized");
 }
 
 Wwise::~Wwise() {
+#if !defined AK_OPTIMIZED
+    AK::Comm::Term();
+#endif
+
     if (AK::SoundEngine::IsInitialized()) {
         AK::SoundEngine::Term();
     }
