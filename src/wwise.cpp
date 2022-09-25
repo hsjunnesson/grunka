@@ -9,6 +9,7 @@
 #include <AK/Tools/Common/AkPlatformFuncs.h>
 
 #include <memory.h>
+#include <new>
 
 #include "Win32/AkFilePackageLowLevelIOBlocking.h"
 
@@ -44,7 +45,7 @@ Wwise::Wwise(foundation::Allocator &allocator)
 
         AkDeviceSettings device_settings;
         AK::StreamMgr::GetDefaultDeviceSettings(device_settings);
-        lowlevel_io = new CAkFilePackageLowLevelIOBlocking();
+        lowlevel_io = MAKE_NEW(allocator, CAkFilePackageLowLevelIOBlocking);
         AKRESULT result = lowlevel_io->Init(device_settings);
         if (result != AK_Success) {
             log_fatal("Could not initialize CAkFilePackageLowLevelIOBlocking: %d", result);
@@ -74,7 +75,7 @@ Wwise::~Wwise() {
     if (AK::IAkStreamMgr::Get()) {
         if (lowlevel_io) {
             lowlevel_io->Term();
-            delete lowlevel_io;
+            MAKE_DELETE(allocator, CAkFilePackageLowLevelIOBlocking, lowlevel_io);
         }
 
         AK::IAkStreamMgr::Get()->Destroy();
