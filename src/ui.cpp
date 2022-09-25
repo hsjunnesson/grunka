@@ -21,7 +21,7 @@ void test_window(engine::Engine &engine, Grunka &grunka, bool *show_window) {
         return;
     }
 
-    ImGui::Text("Hello");
+    ImGui::Text("Hej!");
 
     ImGui::End();
 }

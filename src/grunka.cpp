@@ -1,8 +1,9 @@
 #include "grunka.h"
-#include <engine/engine.h>
+#include "wwise.h"
 
 #pragma warning(push, 0)
 #include <engine/action_binds.h>
+#include <engine/engine.h>
 #include <engine/input.h>
 #include <engine/log.h>
 
@@ -22,15 +23,37 @@ enum class ActionHash : uint64_t {
 
 Grunka::Grunka(foundation::Allocator &allocator, const char *config_path)
 : allocator(allocator)
-, action_binds(nullptr) {
+, action_binds(nullptr)
+, state(ApplicationState::None)
+, wwise(nullptr) {
     action_binds = MAKE_NEW(allocator, engine::ActionBinds, allocator, config_path);
 }
 
 Grunka::~Grunka() {
     MAKE_DELETE(allocator, ActionBinds, action_binds);
+    MAKE_DELETE(allocator, Wwise, wwise);
 }
 
-void engine_update(engine::Engine &engine, void *grunk_object, float t, float dt) {
+void update(engine::Engine &engine, void *grunka_object, float t, float dt) {
+    if (!grunka_object) {
+        return;
+    }
+
+    Grunka *grunka = static_cast<Grunka *>(grunka_object);
+
+    switch (grunka->state) {
+    case ApplicationState::None: {
+        transition(engine, grunka_object, ApplicationState::Initializing);
+        break;
+    }
+    case ApplicationState::Quitting: {
+        transition(engine, grunka_object, ApplicationState::Terminate);
+        break;
+    }
+    default: {
+        break;
+    }
+    }
 }
 
 void on_input(engine::Engine &engine, void *grunka_object, engine::InputCommand &input_command) {
@@ -55,7 +78,7 @@ void on_input(engine::Engine &engine, void *grunka_object, engine::InputCommand 
         switch (action_hash) {
         case ActionHash::QUIT: {
             if (pressed) {
-                engine::terminate(engine);
+                transition(engine, grunka_object, ApplicationState::Quitting);
             }
             break;
         }
@@ -69,7 +92,57 @@ void render(engine::Engine &engine, void *grunka_object) {
 }
 
 void on_shutdown(engine::Engine &engine, void *grunka_object) {
-    engine::terminate(engine);
+    transition(engine, grunka_object, ApplicationState::Quitting);
+}
+
+void transition(engine::Engine &engine, void *grunka_object, ApplicationState application_state) {
+    if (!grunka_object) {
+        return;
+    }
+
+    Grunka *grunka = (Grunka *)grunka_object;
+
+    if (grunka->state == application_state) {
+        return;
+    }
+
+    // When leaving a application state
+    switch (grunka->state) {
+    case ApplicationState::Terminate: {
+        return;
+    }
+    default:
+        break;
+    }
+
+    grunka->state = application_state;
+
+    // When entering a new application state
+    switch (grunka->state) {
+    case ApplicationState::None: {
+        break;
+    }
+    case ApplicationState::Initializing: {
+        log_info("Initializing");
+        assert(grunka->wwise == nullptr);
+        grunka->wwise = MAKE_NEW(grunka->allocator, wwise::Wwise, grunka->allocator);
+        transition(engine, grunka_object, ApplicationState::Running);
+        break;
+    }
+    case ApplicationState::Running: {
+        log_info("Playing");
+        break;
+    }
+    case ApplicationState::Quitting: {
+        log_info("Quitting");
+        break;
+    }
+    case ApplicationState::Terminate: {
+        log_info("Terminating");
+        engine::terminate(engine);
+        break;
+    }
+    }
 }
 
 } // namespace grunka

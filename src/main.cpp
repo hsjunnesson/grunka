@@ -14,7 +14,7 @@
 #if defined(LIVE_PP)
 #include <Windows.h>
 
-#include "LPP_API.h"
+#include "LPP_API_x64_CPP.h"
 #endif
 
 #if defined(SUPERLUMINAL)
@@ -49,8 +49,8 @@ int main(int argc, char *argv[]) {
     }
 
 #if defined(LIVE_PP)
-    HMODULE livePP = lpp::lppLoadAndRegister(L"LivePP", "AGroupName");
-    lpp::lppEnableAllCallingModulesSync(livePP);
+    lpp::LppDefaultAgent lpp_agent = lpp::LppCreateDefaultAgent(L"LivePP");
+    lpp_agent.EnableModule(lpp::LppGetCurrentModulePath(), lpp::LPP_MODULES_OPTION_ALL_IMPORT_MODULES);
 #endif
 
     int status = 0;
@@ -69,16 +69,12 @@ int main(int argc, char *argv[]) {
 
         engine::EngineCallbacks engine_callbacks;
         engine_callbacks.on_input = grunka::on_input;
-        engine_callbacks.update = grunka::engine_update;
+        engine_callbacks.update = grunka::update;
         engine_callbacks.render = grunka::render;
         engine_callbacks.render_imgui = grunka::render_imgui;
         engine_callbacks.on_shutdown = grunka::on_shutdown;
         engine.engine_callbacks = &engine_callbacks;
         engine.game_object = &grunka;
-
-#if defined(LIVE_PP)
-//        game.livePP = livePP;
-#endif
 
         status = engine::run(engine);
     }
@@ -86,8 +82,7 @@ int main(int argc, char *argv[]) {
     foundation::memory_globals::shutdown();
 
 #if defined(LIVE_PP)
-    lpp::lppShutdown(livePP);
-    ::FreeLibrary(livePP);
+    lpp::LppDestroyDefaultAgent(&lpp_agent);
 #endif
 
     return status;

@@ -7,5 +7,6 @@
 *.rdbg
 *.header_hero
 
+/LivePP
 /build
 /imgui.ini

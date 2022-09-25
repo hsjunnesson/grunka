@@ -14,12 +14,39 @@ struct ActionBinds;
 
 namespace grunka {
 
+namespace wwise {
+struct Wwise;
+}
+
+/**
+ * @brief An enum that describes a specific application state.
+ *
+ */
+enum class ApplicationState {
+    // No state.
+    None,
+
+    // Creating application, or loading from a save.
+    Initializing,
+
+    // Running
+    Running,
+
+    // Shutting down, saving and closing the app.
+    Quitting,
+
+    // Final state that signals the engine to terminate the application.
+    Terminate,
+};
+
 struct Grunka {
     Grunka(foundation::Allocator &allocator, const char *config_path);
     ~Grunka();
 
     foundation::Allocator &allocator;
     engine::ActionBinds *action_binds;
+    ApplicationState state;
+    wwise::Wwise *wwise;
 };
 
 /**
@@ -30,7 +57,7 @@ struct Grunka {
  * @param t The current time
  * @param dt The delta time since last update
  */
-void engine_update(engine::Engine &engine, void *grunk_object, float t, float dt);
+void update(engine::Engine &engine, void *grunka_object, float t, float dt);
 
 /**
  * @brief Callback to the Grunka that an input has ocurred.
@@ -64,5 +91,14 @@ void render_imgui(engine::Engine &engine, void *grunka_object);
  * @param grunka_object The Grunka to cleanup
  */
 void on_shutdown(engine::Engine &engine, void *grunka_object);
+
+/**
+ * @brief Transition a Grunka to another application state.
+ *
+ * @param engine The engine which calls this function
+ * @param grunka_object The Grunka to transition
+ * @param application_state The ApplicationState to transition to.
+ */
+void transition(engine::Engine &engine, void *grunka_object, ApplicationState application_state);
 
 } // namespace grunka
