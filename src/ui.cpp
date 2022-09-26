@@ -1,4 +1,5 @@
 #include "grunka.h"
+#include "wwise.h"
 
 #pragma warning(push, 0)
 #include <engine/engine.h>
@@ -9,6 +10,8 @@
 namespace grunka {
 
 void test_window(engine::Engine &engine, Grunka &grunka, bool *show_window) {
+    (void)engine;
+    
     if (*show_window == false) {
         return;
     }
@@ -22,6 +25,10 @@ void test_window(engine::Engine &engine, Grunka &grunka, bool *show_window) {
     }
 
     ImGui::Text("Hej!");
+
+    if (ImGui::Button("ImpIdle")) {
+        wwise::post_event("play_imp_idle", grunka.sound_game_object_id);
+    }
 
     ImGui::End();
 }

@@ -15,18 +15,26 @@
 
 #include <memory.h>
 #include <new>
+#include <inttypes.h>
+#include <atomic>
 
 #include "Win32/AkFilePackageLowLevelIOBlocking.h"
 
 #include <engine/log.h>
 #pragma warning(pop)
 
+namespace {
+const char *bankname_init = "Init.bnk";
+const char *bankname_enemies = "Enemies.bnk";
+const AkGameObjectID LISTENER_ID = 10000;
+std::atomic<uint64_t> game_object_count;
+}
+
 namespace grunka {
 namespace wwise {
 
 Wwise::Wwise(foundation::Allocator &allocator)
 : allocator(allocator)
-, stream_manager(nullptr)
 , lowlevel_io(nullptr)
 {
     // MemoryMgr
@@ -43,7 +51,7 @@ Wwise::Wwise(foundation::Allocator &allocator)
     {
         AkStreamMgrSettings stm_settings;
         AK::StreamMgr::GetDefaultSettings(stm_settings);
-        stream_manager = AK::StreamMgr::Create(stm_settings);
+        AK::IAkStreamMgr *stream_manager = AK::StreamMgr::Create(stm_settings);
         if (!stream_manager) {
             log_fatal("Could not create AK::StreamMgr");
         }
@@ -55,6 +63,9 @@ Wwise::Wwise(foundation::Allocator &allocator)
         if (result != AK_Success) {
             log_fatal("Could not initialize CAkFilePackageLowLevelIOBlocking: %d", result);
         }
+
+        lowlevel_io->SetBasePath(AKTEXT("assets/grunka_wwise/GeneratedSoundBanks/Windows/"));
+        AK::StreamMgr::SetCurrentLanguage(AKTEXT("English(US)"));
     }
 
     // SoundEngine
@@ -74,12 +85,33 @@ Wwise::Wwise(foundation::Allocator &allocator)
     {
         AkCommSettings comm_settings;
         AK::Comm::GetDefaultInitSettings(comm_settings);
+       	AKPLATFORM::SafeStrCpy(comm_settings.szAppNetworkName, "Grunka", AK_COMM_SETTINGS_MAX_STRING_SIZE);
         AKRESULT result = AK::Comm::Init(comm_settings);
         if (result != AK_Success) {
             log_fatal("Could not initialize AK::Comm: %d", result);
         }
     }
 #endif
+
+    // Load banks
+    {
+        auto load_bank = [](const char *bank_name) {
+            AkBankID bank_id;
+            AKRESULT result = AK::SoundEngine::LoadBank(bank_name, bank_id);
+            if (result != AK_Success) {
+                log_fatal("Could not load bank %s: %d", bank_name, result);
+            }
+        };
+
+        load_bank(bankname_init);
+        load_bank(bankname_enemies);
+    }
+
+    // Listener
+    {
+        uint64_t listener_id = register_game_object("Default listener");
+        AK::SoundEngine::SetDefaultListeners(&listener_id, 1);
+    }
 
     log_info("Wwise initialized");
 }
@@ -90,6 +122,7 @@ Wwise::~Wwise() {
 #endif
 
     if (AK::SoundEngine::IsInitialized()) {
+        AK::SoundEngine::UnregisterAllGameObj();
         AK::SoundEngine::Term();
     }
 
@@ -105,6 +138,27 @@ Wwise::~Wwise() {
     if (AK::MemoryMgr::IsInitialized()) {
         AK::MemoryMgr::Term();
     }
+}
+
+void update() {
+    if (AK::SoundEngine::IsInitialized()) {
+        AK::SoundEngine::RenderAudio();
+    }
+}
+
+uint64_t register_game_object(const char *name) {
+    uint64_t id = game_object_count++;
+    AK::SoundEngine::RegisterGameObj(id, name);
+    return id;
+}
+
+uint32_t post_event(const char *event_name, uint64_t game_object_id) {
+    AkPlayingID playing_id = AK::SoundEngine::PostEvent(event_name, game_object_id);
+    if (playing_id == AK_INVALID_PLAYING_ID) {
+        log_error("Could not post event %s for game object %" PRIu64 "", event_name, game_object_id);
+    }
+
+    return playing_id;
 }
 
 } // namespace wwise

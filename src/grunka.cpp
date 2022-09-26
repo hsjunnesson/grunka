@@ -25,7 +25,9 @@ Grunka::Grunka(foundation::Allocator &allocator, const char *config_path)
 : allocator(allocator)
 , action_binds(nullptr)
 , state(ApplicationState::None)
-, wwise(nullptr) {
+, wwise(nullptr)
+, sound_game_object_id(0)
+{
     action_binds = MAKE_NEW(allocator, engine::ActionBinds, allocator, config_path);
 }
 
@@ -35,6 +37,9 @@ Grunka::~Grunka() {
 }
 
 void update(engine::Engine &engine, void *grunka_object, float t, float dt) {
+    (void)t;
+    (void)dt;
+
     if (!grunka_object) {
         return;
     }
@@ -44,6 +49,10 @@ void update(engine::Engine &engine, void *grunka_object, float t, float dt) {
     switch (grunka->state) {
     case ApplicationState::None: {
         transition(engine, grunka_object, ApplicationState::Initializing);
+        break;
+    }
+    case ApplicationState::Running: {
+        wwise::update();
         break;
     }
     case ApplicationState::Quitting: {
@@ -89,6 +98,8 @@ void on_input(engine::Engine &engine, void *grunka_object, engine::InputCommand 
 }
 
 void render(engine::Engine &engine, void *grunka_object) {
+    (void)engine;
+    (void)grunka_object;
 }
 
 void on_shutdown(engine::Engine &engine, void *grunka_object) {
@@ -126,6 +137,7 @@ void transition(engine::Engine &engine, void *grunka_object, ApplicationState ap
         log_info("Initializing");
         assert(grunka->wwise == nullptr);
         grunka->wwise = MAKE_NEW(grunka->allocator, wwise::Wwise, grunka->allocator);
+        grunka->sound_game_object_id = wwise::register_game_object("Imp");
         transition(engine, grunka_object, ApplicationState::Running);
         break;
     }

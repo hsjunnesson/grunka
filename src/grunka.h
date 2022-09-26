@@ -47,6 +47,7 @@ struct Grunka {
     engine::ActionBinds *action_binds;
     ApplicationState state;
     wwise::Wwise *wwise;
+    uint64_t sound_game_object_id;
 };
 
 /**
