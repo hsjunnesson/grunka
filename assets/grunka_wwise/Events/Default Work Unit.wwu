@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{6CF2A8A6-7DFB-4113-91A0-EBFDFB2CEE89}" SchemaVersion="103">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{6CF2A8A6-7DFB-4113-91A0-EBFDFB2CEE89}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="play_imp_idle" ID="{29987E03-594A-4E1D-A5B2-CDCB9BDB937F}">
+					<ChildrenList>
+						<Action Name="" ID="{8D59B9DD-D337-4D58-A655-FB84C6A3EF90}" ShortID="890538510">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="imp_idle" ID="{0A800293-8174-4040-86BC-F7489FBD451F}" WorkUnitID="{4E53A7D1-3DA8-4E49-8E97-2FF930B46070}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="play_imp_sight" ID="{F12BE70C-A36B-4AD9-9AB4-A92D7AF3EA27}">
+					<ChildrenList>
+						<Action Name="" ID="{74DBCAF4-DAE2-4D45-90CD-5F17CB8979C0}" ShortID="630242664">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="imp_sight" ID="{5BA3E93D-D48C-43A8-9B7D-16798B245F9F}" WorkUnitID="{4E53A7D1-3DA8-4E49-8E97-2FF930B46070}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

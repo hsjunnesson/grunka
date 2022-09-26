@@ -7,6 +7,12 @@
 *.rdbg
 *.header_hero
 
+/assets/grunka_wwise/.cache/
+/assets/grunka_wwise/*.prof
+/assets/grunka_wwise/*_WwiseProject.*.validationcache
+/assets/grunka_wwise/*_WwiseProject.*.wsettings
+/assets/grunka_wwise/**/*.akd
+
 /LivePP
 /build
 /imgui.ini

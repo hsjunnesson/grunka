@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{4E53A7D1-3DA8-4E49-8E97-2FF930B46070}" SchemaVersion="103" RootDocumentID="{3290712A-BA85-4F8D-B7E9-11798570FA2C}" ParentDocumentID="{3290712A-BA85-4F8D-B7E9-11798570FA2C}">
+	<AudioObjects>
+		<WorkUnit Name="Imp" ID="{4E53A7D1-3DA8-4E49-8E97-2FF930B46070}" OwnerID="{3290712A-BA85-4F8D-B7E9-11798570FA2C}" PersistMode="Nested">
+			<ChildrenList>
+				<RandomSequenceContainer Name="imp_sight" ID="{5BA3E93D-D48C-43A8-9B7D-16798B245F9F}" ShortID="847172149">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0735E549-57EF-49A7-B68A-574FA8881B21}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8997AB73-432B-4C30-9348-2285019F1FF1}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="imp_sight_01" ID="{F76355C2-2669-4E52-B78B-087C5F278D95}" ShortID="857946739">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0735E549-57EF-49A7-B68A-574FA8881B21}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8997AB73-432B-4C30-9348-2285019F1FF1}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="dsbgsit1" ID="{D445931E-D7E1-4150-A9A8-954E1D40553D}">
+									<Language>SFX</Language>
+									<AudioFile>dsbgsit1.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="580522784"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists/>
+							<ActiveSourceList>
+								<ActiveSource Name="dsbgsit1" ID="{D445931E-D7E1-4150-A9A8-954E1D40553D}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="imp_sight_02" ID="{0F073EFA-EA86-4495-8029-09DAB77F93F6}" ShortID="604614402">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0735E549-57EF-49A7-B68A-574FA8881B21}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8997AB73-432B-4C30-9348-2285019F1FF1}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="dsbgsit2" ID="{582F7183-C4C7-4654-97CE-54B8908A96E5}">
+									<Language>SFX</Language>
+									<AudioFile>dsbgsit2.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="507827189"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists/>
+							<ActiveSourceList>
+								<ActiveSource Name="dsbgsit2" ID="{582F7183-C4C7-4654-97CE-54B8908A96E5}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+					<ObjectLists/>
+				</RandomSequenceContainer>
+				<RandomSequenceContainer Name="imp_idle" ID="{0A800293-8174-4040-86BC-F7489FBD451F}" ShortID="972861136">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0735E549-57EF-49A7-B68A-574FA8881B21}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8997AB73-432B-4C30-9348-2285019F1FF1}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="imp_idle_01" ID="{C2B0C657-6368-4876-A720-C111E30BEC8D}" ShortID="538442154">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0735E549-57EF-49A7-B68A-574FA8881B21}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8997AB73-432B-4C30-9348-2285019F1FF1}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="dsbgact" ID="{D579E644-47B9-4017-8831-A7C279A1C447}">
+									<Language>SFX</Language>
+									<AudioFile>dsbgact.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="29092676"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists/>
+							<ActiveSourceList>
+								<ActiveSource Name="dsbgact" ID="{D579E644-47B9-4017-8831-A7C279A1C447}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+					<ObjectLists/>
+				</RandomSequenceContainer>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

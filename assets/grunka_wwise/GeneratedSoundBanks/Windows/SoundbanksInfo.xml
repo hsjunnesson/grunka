@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="12" SoundbankVersion="140">
+	<RootPaths>
+		<ProjectRoot>C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\</ProjectRoot>
+		<SourceFilesRoot>C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="1355168291" Language="SFX" Hash="837375629">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="2242381963" Language="SFX" Hash="2971757326">
+			<ObjectPath>\SoundBanks\Default Work Unit\Enemies</ObjectPath>
+			<ShortName>Enemies</ShortName>
+			<Path>Enemies.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3320077705" Name="play_imp_idle" ObjectPath="\Events\Default Work Unit\play_imp_idle"/>
+				<Event Id="1227588162" Name="play_imp_sight" ObjectPath="\Events\Default Work Unit\play_imp_sight"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="29092676" Language="SFX">
+					<ShortName>dsbgact.wav</ShortName>
+					<Path>SFX\dsbgact_10C4C929.wem</Path>
+				</File>
+				<File Id="507827189" Language="SFX">
+					<ShortName>dsbgsit2.wav</ShortName>
+					<Path>SFX\dsbgsit2_10C4C929.wem</Path>
+				</File>
+				<File Id="580522784" Language="SFX">
+					<ShortName>dsbgsit1.wav</ShortName>
+					<Path>SFX\dsbgsit1_10C4C929.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>

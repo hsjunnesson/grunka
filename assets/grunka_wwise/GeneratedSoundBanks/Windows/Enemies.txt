@@ -1,0 +1,9 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1227588162	play_imp_sight			\Default Work Unit\play_imp_sight	
+	3320077705	play_imp_idle			\Default Work Unit\play_imp_idle	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	29092676	imp_idle_01	C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\.cache\Windows\SFX\dsbgact_10C4C929.wem		\Actor-Mixer Hierarchy\Enemies\Imp\imp_idle\imp_idle_01		20112
+	507827189	imp_sight_02	C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\.cache\Windows\SFX\dsbgsit2_10C4C929.wem		\Actor-Mixer Hierarchy\Enemies\Imp\imp_sight\imp_sight_02		32214
+	580522784	imp_sight_01	C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\.cache\Windows\SFX\dsbgsit1_10C4C929.wem		\Actor-Mixer Hierarchy\Enemies\Imp\imp_sight\imp_sight_01		27316
+

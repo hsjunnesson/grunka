@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{611D9273-5A16-442C-AE68-A3AFF49178F7}" SchemaVersion="103">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{611D9273-5A16-442C-AE68-A3AFF49178F7}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="Enemies" ID="{15FD5962-7A30-4FAF-B5FF-E4EC0CC4CFBE}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Enemies" ID="{3290712A-BA85-4F8D-B7E9-11798570FA2C}" WorkUnitID="{3290712A-BA85-4F8D-B7E9-11798570FA2C}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>
