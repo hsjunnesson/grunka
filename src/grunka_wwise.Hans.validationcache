@@ -6,7 +6,7 @@
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Switches\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\States\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Soundcaster Sessions\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\SoundBanks\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\SoundBanks\Default Work Unit.wwu" DateLow="1664132940" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Queries\Factory Queries.wwu" DateLow="1664038184" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Queries\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Presets\Factory Spatial Audio.wwu" DateLow="1664038184" DateHigh="0"/>
@@ -16,9 +16,10 @@
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Metadata\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Master-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Interactive Music Hierarchy\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\grunka_wwise.wproj" DateLow="1664128831" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\grunka_wwise.wproj" DateLow="1664138100" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\grunka_wwise.Hans.wsettings" DateLow="1664139312" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Game Parameters\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Events\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Events\Default Work Unit.wwu" DateLow="1664134567" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Effects\Factory Effects.wwu" DateLow="1664038184" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Effects\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Dynamic Dialogue\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
@@ -27,6 +28,9 @@
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Control Surface Sessions\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Audio Devices\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Attenuations\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Actor-Mixer Hierarchy\Imp.wwu" DateLow="1664132739" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Actor-Mixer Hierarchy\Factory Synth One.wwu" DateLow="1664038184" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Actor-Mixer Hierarchy\Enemies.wwu" DateLow="1664132739" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Actor-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1664128831" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Hans\Documents\GitHub\grunka\assets\grunka_wwise\Actor-Mixer Hierarchy\AudioInput.wwu" DateLow="1664139310" DateHigh="0"/>
 </ValidationCache>
