@@ -11,7 +11,7 @@
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Language="SFX" Hash="837375629">
+		<SoundBank Id="1355168291" Language="SFX" Hash="394294520">
 			<ObjectPath>Init</ObjectPath>
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
@@ -38,6 +38,15 @@
 					<Path>SFX\dsbgsit1_10C4C929.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="2875777539" Language="SFX" Hash="637929116">
+			<ObjectPath>\SoundBanks\Default Work Unit\Grunka</ObjectPath>
+			<ShortName>Grunka</ShortName>
+			<Path>Grunka.bnk</Path>
+			<IncludedEvents>
+				<Event Id="254501372" Name="play_grunka" ObjectPath="\Events\Default Work Unit\play_grunka"/>
+				<Event Id="274503786" Name="stop_grunka" ObjectPath="\Events\Default Work Unit\stop_grunka"/>
+			</IncludedEvents>
 		</SoundBank>
 	</SoundBanks>
 </SoundBanksInfo>

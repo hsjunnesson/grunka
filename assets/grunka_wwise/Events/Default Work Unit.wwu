@@ -25,6 +25,31 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="play_grunka" ID="{685C0F28-D3E9-44C7-9F98-53ABFAA56858}">
+					<ChildrenList>
+						<Action Name="" ID="{71EB8A47-E5B2-42C0-9CC3-C0DB01FA982D}" ShortID="932608540">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Grunka Audio Input" ID="{20C13C26-299D-452E-9EF3-22144D8CD4AF}" WorkUnitID="{7C096B4B-48B1-40CA-A26A-BA1665A5755A}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="stop_grunka" ID="{C212B02D-660C-4110-92A1-30AB4C61B658}">
+					<ChildrenList>
+						<Action Name="" ID="{223F45F3-CC69-4F11-AC1F-78D104FF3841}" ShortID="229634934">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Grunka Audio Input" ID="{20C13C26-299D-452E-9EF3-22144D8CD4AF}" WorkUnitID="{7C096B4B-48B1-40CA-A26A-BA1665A5755A}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

@@ -10,6 +10,13 @@
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>
 				</SoundBank>
+				<SoundBank Name="Grunka" ID="{26125524-E2C2-48D0-B730-20D6F8313DA4}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Grunka" ID="{7C096B4B-48B1-40CA-A26A-BA1665A5755A}" WorkUnitID="{7C096B4B-48B1-40CA-A26A-BA1665A5755A}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
 			</ChildrenList>
 		</WorkUnit>
 	</SoundBanks>

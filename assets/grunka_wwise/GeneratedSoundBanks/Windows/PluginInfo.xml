@@ -3,5 +3,6 @@
 	<Plugins>
 		<Plugin Name="System" ID="11403271"/>
 		<Plugin Name="No Output" ID="11862023"/>
+		<Plugin Name="Wwise Audio Input" ID="13107202" DLL="AkAudioInput" StaticLib="AkAudioInputSource"/>
 	</Plugins>
 </PluginInfo>

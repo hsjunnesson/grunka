@@ -1,4 +1,5 @@
 #include "grunka.h"
+#include "engines.h"
 #include "wwise.h"
 
 #pragma warning(push, 0)
@@ -11,6 +12,11 @@
 #include <hash.h>
 #include <memory.h>
 #include <murmur_hash.h>
+
+#include <mutex>
+#include <thread>
+
+#include "Wwise_IDs.h"
 #pragma warning(pop)
 
 namespace grunka {
@@ -26,14 +32,18 @@ Grunka::Grunka(foundation::Allocator &allocator, const char *config_path)
 , action_binds(nullptr)
 , state(ApplicationState::None)
 , wwise(nullptr)
-, sound_game_object_id(0)
-{
+, grunka_game_object_id(0)
+, grunka_playing_id(0)
+, engines(nullptr)
+, play_sine(false) {
     action_binds = MAKE_NEW(allocator, engine::ActionBinds, allocator, config_path);
+    engines = MAKE_NEW(allocator, grunka::engines::Engines, allocator);
 }
 
 Grunka::~Grunka() {
     MAKE_DELETE(allocator, ActionBinds, action_binds);
     MAKE_DELETE(allocator, Wwise, wwise);
+    MAKE_DELETE(allocator, Engines, engines);
 }
 
 void update(engine::Engine &engine, void *grunka_object, float t, float dt) {
@@ -56,7 +66,9 @@ void update(engine::Engine &engine, void *grunka_object, float t, float dt) {
         break;
     }
     case ApplicationState::Quitting: {
-        transition(engine, grunka_object, ApplicationState::Terminate);
+        if (grunka->engines->state == engines::EnginesState::None || grunka->engines->state == engines::EnginesState::Stopped) {
+            transition(engine, grunka_object, ApplicationState::Terminate);
+        }
         break;
     }
     default: {
@@ -119,6 +131,23 @@ void transition(engine::Engine &engine, void *grunka_object, ApplicationState ap
 
     // When leaving a application state
     switch (grunka->state) {
+    case ApplicationState::Running: {
+        if (grunka->grunka_game_object_id) {
+            if (grunka->grunka_playing_id) {
+                wwise::post_event(AK::EVENTS::STOP_GRUNKA, grunka->grunka_game_object_id);
+                grunka->grunka_playing_id = 0;
+            }
+
+            wwise::unregister_game_object(grunka->grunka_game_object_id);
+            grunka->grunka_game_object_id = 0;
+        }
+
+        if (grunka->engines) {
+            engines::stop(*grunka->engines);
+        }
+
+        break;
+    }
     case ApplicationState::Terminate: {
         return;
     }
@@ -137,11 +166,13 @@ void transition(engine::Engine &engine, void *grunka_object, ApplicationState ap
         log_info("Initializing");
         assert(grunka->wwise == nullptr);
         grunka->wwise = MAKE_NEW(grunka->allocator, wwise::Wwise, grunka->allocator);
-        grunka->sound_game_object_id = wwise::register_game_object("Imp");
         transition(engine, grunka_object, ApplicationState::Running);
         break;
     }
     case ApplicationState::Running: {
+        grunka->grunka_game_object_id = wwise::register_game_object("Grunka");
+        wwise::post_event(AK::EVENTS::PLAY_GRUNKA, grunka->grunka_game_object_id);
+        engines::start(*grunka->engines, grunka);
         log_info("Playing");
         break;
     }

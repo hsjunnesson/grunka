@@ -4,6 +4,7 @@
 #pragma warning(push, 0)
 #include <engine/engine.h>
 
+#include "Wwise_IDs.h"
 #include <imgui.h>
 #pragma warning(pop)
 
@@ -11,7 +12,7 @@ namespace grunka {
 
 void test_window(engine::Engine &engine, Grunka &grunka, bool *show_window) {
     (void)engine;
-    
+
     if (*show_window == false) {
         return;
     }
@@ -24,10 +25,15 @@ void test_window(engine::Engine &engine, Grunka &grunka, bool *show_window) {
         return;
     }
 
-    ImGui::Text("Hej!");
+    ImGui::Text("Controls");
 
-    if (ImGui::Button("ImpIdle")) {
-        wwise::post_event("play_imp_idle", grunka.sound_game_object_id);
+    if (ImGui::Button("PLAY_IMP_IDLE")) {
+        wwise::post_event(AK::EVENTS::PLAY_IMP_IDLE, grunka.grunka_game_object_id);
+    }
+
+    const char *play_sine_button_text = grunka.play_sine ? "Stop sine" : "Play sine";
+    if (ImGui::Button(play_sine_button_text)) {
+        grunka.play_sine = !grunka.play_sine;
     }
 
     ImGui::End();

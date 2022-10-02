@@ -7,7 +7,7 @@
 				<Property Name="OverrideColor" Type="bool" Value="True"/>
 			</PropertyList>
 			<ChildrenList>
-				<Sound Name="AudioInputSFX" ID="{20C13C26-299D-452E-9EF3-22144D8CD4AF}" ShortID="925333343">
+				<Sound Name="Grunka Audio Input" ID="{20C13C26-299D-452E-9EF3-22144D8CD4AF}" ShortID="925333343">
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0735E549-57EF-49A7-B68A-574FA8881B21}"/>

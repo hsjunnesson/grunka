@@ -1,22 +1,22 @@
 #include "wwise.h"
 
 #pragma warning(push, 0)
+#include <AK/Plugin/AkAudioInputSourceFactory.h>
 #include <AK/SoundEngine/Common/AkMemoryMgr.h>
 #include <AK/SoundEngine/Common/AkModule.h>
 #include <AK/SoundEngine/Common/AkSoundEngine.h>
 #include <AK/SoundEngine/Common/AkStreamMgrModule.h>
 #include <AK/SoundEngine/Common/IAkStreamMgr.h>
-
 #include <AK/Tools/Common/AkPlatformFuncs.h>
 
 #if !defined AK_OPTIMIZED
 #include <AK/Comm/AkCommunication.h>
 #endif
 
+#include <atomic>
+#include <inttypes.h>
 #include <memory.h>
 #include <new>
-#include <inttypes.h>
-#include <atomic>
 
 #include "Win32/AkFilePackageLowLevelIOBlocking.h"
 
@@ -26,17 +26,29 @@
 namespace {
 const char *bankname_init = "Init.bnk";
 const char *bankname_enemies = "Enemies.bnk";
+const char *bankname_grunka = "Grunka.bnk";
 const AkGameObjectID LISTENER_ID = 10000;
 std::atomic<uint64_t> game_object_count;
-}
+} // namespace
 
 namespace grunka {
 namespace wwise {
 
+void audio_input_execute_callback(AkPlayingID playing_id, AkAudioBuffer *buffer) {
+    (void)playing_id;
+    buffer->uValidFrames = 0;
+    buffer->eState = AK_NoDataNeeded;
+    // continue at SoundInput.cpp ::Execute
+}
+
+void audio_input_get_format_callback(AkPlayingID playing_id, AkAudioFormat &audio_format) {
+    (void)playing_id;
+    (void)audio_format;
+}
+
 Wwise::Wwise(foundation::Allocator &allocator)
 : allocator(allocator)
-, lowlevel_io(nullptr)
-{
+, lowlevel_io(nullptr) {
     // MemoryMgr
     {
         AkMemSettings mem_settings;
@@ -85,7 +97,7 @@ Wwise::Wwise(foundation::Allocator &allocator)
     {
         AkCommSettings comm_settings;
         AK::Comm::GetDefaultInitSettings(comm_settings);
-       	AKPLATFORM::SafeStrCpy(comm_settings.szAppNetworkName, "Grunka", AK_COMM_SETTINGS_MAX_STRING_SIZE);
+        AKPLATFORM::SafeStrCpy(comm_settings.szAppNetworkName, "Grunka", AK_COMM_SETTINGS_MAX_STRING_SIZE);
         AKRESULT result = AK::Comm::Init(comm_settings);
         if (result != AK_Success) {
             log_fatal("Could not initialize AK::Comm: %d", result);
@@ -105,12 +117,18 @@ Wwise::Wwise(foundation::Allocator &allocator)
 
         load_bank(bankname_init);
         load_bank(bankname_enemies);
+        load_bank(bankname_grunka);
     }
 
     // Listener
     {
         uint64_t listener_id = register_game_object("Default listener");
         AK::SoundEngine::SetDefaultListeners(&listener_id, 1);
+    }
+
+    // Setup AudioInput formats
+    {
+        SetAudioInputCallbacks(audio_input_execute_callback, audio_input_get_format_callback);
     }
 
     log_info("Wwise initialized");
@@ -150,6 +168,19 @@ uint64_t register_game_object(const char *name) {
     uint64_t id = game_object_count++;
     AK::SoundEngine::RegisterGameObj(id, name);
     return id;
+}
+
+void unregister_game_object(uint64_t game_object_id) {
+    AK::SoundEngine::UnregisterGameObj(game_object_id);
+}
+
+uint32_t post_event(uint32_t event_id, uint64_t game_object_id) {
+    AkPlayingID playing_id = AK::SoundEngine::PostEvent(event_id, game_object_id);
+    if (playing_id == AK_INVALID_PLAYING_ID) {
+        log_error("Could not post event %d for game object %" PRIu64 "", event_id, game_object_id);
+    }
+
+    return playing_id;
 }
 
 uint32_t post_event(const char *event_name, uint64_t game_object_id) {

@@ -1,0 +1,7 @@
+Event	ID	Name			Wwise Object Path	Notes
+	254501372	play_grunka			\Default Work Unit\play_grunka	
+	274503786	stop_grunka			\Default Work Unit\stop_grunka	
+
+Source plug-ins	ID	Name	Type		Wwise Object Path	Notes
+	473989126	Wwise Audio Input	Wwise Audio Input		\Actor-Mixer Hierarchy\Default Work Unit\Grunka\Grunka Audio Input\Wwise Audio Input	
+
