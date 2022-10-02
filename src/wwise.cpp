@@ -1,13 +1,16 @@
 #include "wwise.h"
 
 #pragma warning(push, 0)
-#include <AK/Plugin/AkAudioInputSourceFactory.h>
+#include <AK/SoundEngine/Common/AkTypes.h>
+#include <AK/Tools/Common/AkPlatformFuncs.h>
+
 #include <AK/SoundEngine/Common/AkMemoryMgr.h>
 #include <AK/SoundEngine/Common/AkModule.h>
 #include <AK/SoundEngine/Common/AkSoundEngine.h>
 #include <AK/SoundEngine/Common/AkStreamMgrModule.h>
 #include <AK/SoundEngine/Common/IAkStreamMgr.h>
-#include <AK/Tools/Common/AkPlatformFuncs.h>
+
+#include <AK/Plugin/AkAudioInputSourceFactory.h>
 
 #if !defined AK_OPTIMIZED
 #include <AK/Comm/AkCommunication.h>

@@ -13,14 +13,17 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID PLAY_GRUNKA = 254501372U;
         static const AkUniqueID PLAY_IMP_IDLE = 3320077705U;
         static const AkUniqueID PLAY_IMP_SIGHT = 1227588162U;
+        static const AkUniqueID STOP_GRUNKA = 274503786U;
     } // namespace EVENTS
 
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
         static const AkUniqueID ENEMIES = 2242381963U;
+        static const AkUniqueID GRUNKA = 2875777539U;
     } // namespace BANKS
 
     namespace BUSSES
