@@ -3,7 +3,9 @@
 #pragma warning(push, 0)
 #include <collection_types.h>
 #include <memory_types.h>
+
 #include <stdint.h>
+#include <AK/SoundEngine/Common/AkTypes.h>
 #pragma warning(pop)
 
 namespace std {
@@ -33,6 +35,9 @@ struct Engines {
 
     foundation::Allocator &allocator;
     EnginesState state;
+
+    foundation::Array<AkReal32> data;
+
     std::mutex *mutex;
     std::thread *thread;
     std::atomic<bool> *stop;

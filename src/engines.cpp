@@ -5,6 +5,7 @@
 
 #pragma warning(push, 0)
 #include <memory.h>
+#include <array.h>
 
 #include <assert.h>
 #include <mutex>
@@ -21,11 +22,14 @@ void thread_function(grunka::engines::Engines *engines, grunka::Grunka *grunka) 
     using namespace std::chrono_literals;
 
     while (true) {
+        auto start = std::chrono::high_resolution_clock::now();
+
         if (*engines->stop) {
             break;
         }
 
-        std::this_thread::sleep_for(10ms);
+        auto next = start + 10ms;
+        std::this_thread::sleep_until(next);
     }
 
     {
@@ -37,6 +41,7 @@ void thread_function(grunka::engines::Engines *engines, grunka::Grunka *grunka) 
 Engines::Engines(foundation::Allocator &allocator)
 : allocator(allocator)
 , state(EnginesState::None)
+, data(allocator)
 , mutex(nullptr)
 , thread(nullptr)
 , stop(nullptr) {

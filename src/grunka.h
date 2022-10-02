@@ -12,6 +12,8 @@ struct InputCommand;
 struct ActionBinds;
 } // namespace engine
 
+class CAkFilePackageLowLevelIOBlocking;
+
 namespace grunka {
 
 namespace engines {
@@ -50,7 +52,8 @@ struct Grunka {
     foundation::Allocator &allocator;
     engine::ActionBinds *action_binds;
     ApplicationState state;
-    wwise::Wwise *wwise;
+
+    CAkFilePackageLowLevelIOBlocking *lowlevel_io;
     uint64_t grunka_game_object_id;
     uint32_t grunka_playing_id;
 
@@ -109,5 +112,18 @@ void on_shutdown(engine::Engine &engine, void *grunka_object);
  * @param application_state The ApplicationState to transition to.
  */
 void transition(engine::Engine &engine, void *grunka_object, ApplicationState application_state);
+
+namespace wwise {
+
+void update();
+
+uint64_t register_game_object(const char *name);
+void unregister_game_object(uint64_t game_object_id);
+
+uint32_t post_event(uint32_t event_id, uint64_t game_object_id);
+uint32_t post_event(const char *event_name, uint64_t game_object_id);
+
+}
+
 
 } // namespace grunka

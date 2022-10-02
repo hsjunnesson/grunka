@@ -1,5 +1,4 @@
 #include "grunka.h"
-#include "wwise.h"
 
 #pragma warning(push, 0)
 #include <engine/engine.h>
