@@ -43,6 +43,7 @@ const char *bankname_init = "Init.bnk";
 const char *bankname_enemies = "Enemies.bnk";
 const char *bankname_grunka = "Grunka.bnk";
 std::atomic<uint64_t> game_object_count;
+grunka::Grunka *grunka_singleton = nullptr;
 }
 
 namespace grunka {
@@ -69,6 +70,7 @@ Grunka::Grunka(foundation::Allocator &allocator, const char *config_path)
 , play_sine(false) {
     action_binds = MAKE_NEW(allocator, engine::ActionBinds, allocator, config_path);
     engines = MAKE_NEW(allocator, grunka::engines::Engines, allocator);
+    grunka_singleton = this;
 }
 
 Grunka::~Grunka() {
@@ -240,14 +242,28 @@ void transition(engine::Engine &engine, void *grunka_object, ApplicationState ap
 }
 
 namespace wwise {
+using namespace foundation::array;
 
 void audio_input_execute_callback(AkPlayingID playing_id, AkAudioBuffer *buffer) {
     (void)playing_id;
 
-    // std::scoped_lock lock(*engines->mutex);
-    // if (engines->data)
-    buffer->uValidFrames = 0;
-    buffer->eState = AK_NoDataNeeded;
+    if (!grunka_singleton) {
+        return;
+    }
+
+    const grunka::Grunka &grunka = *grunka_singleton;
+    std::scoped_lock lock(*grunka.engines->mutex);
+//    if (size(grunka.engines->data)) {
+        AkSampleType *buf = buffer->GetChannel(0);
+        for (int i = 0; i < 10; ++i) {
+            buf[i] = rand();
+        }
+        buffer->uValidFrames = 10;
+        buffer->eState = AK_DataReady;
+    // } else {
+    //     buffer->uValidFrames = 0;
+    //     buffer->eState = AK_NoDataNeeded;
+    // }
 }
 
 void audio_input_get_format_callback(AkPlayingID playing_id, AkAudioFormat &audio_format) {
